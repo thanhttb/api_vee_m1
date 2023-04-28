@@ -1,0 +1,44 @@
+version: "3.8"
+
+volumes:
+  db-data: ~
+
+services:
+  #PHP service
+  php: 
+    container_name: php
+    build: 
+      context: .
+      target: php
+      args: 
+        - APP_ENV=${APP_ENV}
+    environment:
+      - APP_ENV=${APP_ENV}
+      - CONTAINER_ROLE=app
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+      - redis
+  #Database Server
+  mysql: 
+    image: mysql:8.0
+    container_name: api_center
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: center_vietelite
+      MYSQL_USER: center_vietelite
+      MYSQL_PASSWORD: k75iinNnYpniAkKK
+  #Redis Server
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes --requirepass $${11231123}
+    ports: 
+      - 6379:6379
