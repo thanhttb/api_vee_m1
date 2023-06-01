@@ -53,7 +53,6 @@ class AuthController extends Controller
             'user' => $user
         ], 201);
     }
-
     /**
      * Log the user out (Invalidate the token).
      *
