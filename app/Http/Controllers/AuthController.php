@@ -81,6 +81,7 @@ class AuthController extends Controller
     /**
      * Get the token array structure.
      *
+     * 
      * @param  string $token
      *
      * @return \Illuminate\Http\JsonResponse
