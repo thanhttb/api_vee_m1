@@ -17,8 +17,9 @@ class UserController extends Controller
             $name=time().$file->getClientOriginalName();
             $filePath = 'images/' . $name;
             $path = Storage::disk('s3')->put($filePath, file_get_contents($file));
-            $path = Storage::disk('s3')->url($path);
-            return response()->json($path);
+            
+            return response()->json('https://vietelite.s3.ap-southeast-1.amazonaws.com/'.$filePath);
+            
          }
     }
 }
